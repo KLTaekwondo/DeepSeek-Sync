@@ -1,51 +1,81 @@
 # DeepSeek-Sync
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue)](https://plugins.jetbrains.com)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
+**Version**: 0.1.1
+**License**: Apache 2.0
 
-**Bring DeepSeek Web Chat into your IDE.**
+Bring DeepSeek into your IDE — seamless side panel integration with enhanced platform access.
 
-No more switching between browser and editor — just open the side panel, log in, and start chatting. Stay in flow and get answers faster.
+将 DeepSeek 带入你的 IDE — 侧边栏无缝集成，增强平台访问。
 
-将 DeepSeek 网页版带入你的 IDE，无需切换浏览器，侧边栏直接对话。
+---
 
-## ✨ Features 功能
+## Features / 功能特性
 
-- 🌐 Embedded DeepSeek Web Chat in a side tool window / 在侧边栏嵌入 DeepSeek 网页对话
-- ⚡ One-click access without leaving the IDE / 一键打开，无需离开 IDE
-- 🎯 Stay in flow and get answers faster / 保持编码心流，更快获得帮助
+- 🌐 **Embedded DeepSeek Web Chat** — Side tool window chat without leaving your IDE  
+  **嵌入 DeepSeek 网页聊天** — 侧边栏直接对话，不离开 IDE
 
-## 📸 Screenshots 截图
+- 📊 **Platform Dashboard** — Quick access to `platform.deepseek.com` to view API Key status and remaining credits  
+  **平台控制台** — 快速访问 `platform.deepseek.com`，查看 API Key 状态和剩余额度
 
-*Coming soon...*
+- 🔄 **Page Refresh** — Easy reload of embedded web pages when needed  
+  **页面刷新** — 需要时一键刷新嵌入式网页
 
-## 📦 Installation 安装
+- ⚡ **One-Click Access** — Open DeepSeek instantly from the IDE sidebar  
+  **一键访问** — 从 IDE 侧边栏即刻打开 DeepSeek
 
-1. Go to **Settings** → **Plugins** → **Marketplace** / 进入设置 → 插件 → 市场
-2. Search for **DeepSeek-Sync** / 搜索 DeepSeek-Sync
-3. Click **Install** / 点击安装
-4. Restart IDE / 重启 IDE
+- 🎯 **Stay in Flow** — Get coding answers faster without context switching  
+  **保持心流** — 无需切换上下文，更快获取答案
 
-Or install manually:
-- Download the `.jar` from [Releases](https://github.com/KLTaekwondo/DeepSeek-Sync/releases)
-- **Settings** → **Plugins** → ⚙️ → **Install Plugin from Disk...**
+- 🚀 **Multi-IDE Support** — Compatible with the full JetBrains ecosystem (IntelliJ IDEA, PyCharm, WebStorm, GoLand, CLion, Rider, PhpStorm, RubyMine, and more)  
+  **全 IDE 支持** — 兼容整个 JetBrains 生态系统（IntelliJ IDEA、PyCharm、WebStorm、GoLand、CLion、Rider、PhpStorm、RubyMine 等）
 
-## 🚀 Usage 使用
+---
 
-1. After installation, you'll see the **DeepSeek-Sync** icon in the right sidebar / 安装后在右侧边栏找到 DeepSeek-Sync 图标
+## Installation / 安装
+
+**From JetBrains Marketplace (recommended) / 从 JetBrains 市场安装（推荐）：**
+
+1. Go to `Settings → Plugins → Marketplace` / 进入 `设置 → 插件 → 市场`
+2. Search for `DeepSeek-Sync` / 搜索 `DeepSeek-Sync`
+3. Click Install / 点击安装
+4. Restart your IDE / 重启 IDE
+
+**Manual installation / 手动安装：**
+
+1. Download the `.jar` file from [Releases](https://github.com/KLTaekwondo/DeepSeek-Sync/releases) / 从 Releases 下载 `.jar` 文件
+2. Go to `Settings → Plugins → ⚙️ → Install Plugin from Disk...` / 进入 `设置 → 插件 → ⚙️ → 从磁盘安装插件...`
+3. Select the downloaded `.jar` file / 选择下载的 `.jar` 文件
+4. Restart your IDE / 重启 IDE
+
+---
+
+## Usage / 使用说明
+
+1. After installation, locate the **DeepSeek-Sync icon** in the right sidebar (or click `View → Tool Windows → DeepSeek-Sync`)  
+   安装后，在**右侧边栏**找到 **DeepSeek-Sync 图标**（或点击 `视图 → 工具窗口 → DeepSeek-Sync`）
+
 2. Click to open the tool window / 点击打开工具窗口
-3. Log in to your DeepSeek account and start chatting / 登录 DeepSeek 账号即可对话
 
-## 🛠️ Development 开发
+3. Use the built-in tabs: / 使用内置标签页：
+   - **Chat** — DeepSeek web chat directly in your IDE / **聊天** — IDE 内直接进行 DeepSeek 网页对话
+   - **Dashboard** — Platform page to check API Key usage and credits / **控制台** — 查看 API Key 使用情况和剩余额度
 
-Built with IntelliJ Platform Plugin Template.
+4. Click the **Refresh** button anytime to reload the current page / 随时点击**刷新按钮**重新加载当前页面
+
+---
+
+## Development / 开发构建
+
+Built with [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template).
+
+基于 [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template) 构建。
 
 ```bash
 # Clone the project / 克隆项目
 git clone https://github.com/KLTaekwondo/DeepSeek-Sync.git
 
-# Build / 构建
+# Build the plugin / 构建插件
 ./gradlew buildPlugin
 
-# Run sandbox IDE / 运行沙盒 IDE
+# Run sandbox IDE for testing / 运行沙盒 IDE 进行测试
 ./gradlew runIde
