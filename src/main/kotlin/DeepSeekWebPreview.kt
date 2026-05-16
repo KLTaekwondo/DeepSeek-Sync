@@ -6,15 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.SwingPanel
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.jewel.ui.component.Text
 
 @Composable
-@Preview
-fun DeepSeekWebPreview() {
+fun DeepSeekWebPreview(url: String) {
     // 先用 remember 保存浏览器实例，保证生命周期可控
     val browser = remember {
-        DeepSeekBrowserHolder.getOnCreateBrowser()
+        DeepSeekBrowserHolder.getOrCreateBrowser(url)
     }
 
     Column(modifier = Modifier.fillMaxSize()) {

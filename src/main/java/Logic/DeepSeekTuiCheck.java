@@ -1,3 +1,7 @@
+package Logic;
+
+import Entity.EnvironmentResult;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -10,12 +14,12 @@ public class DeepSeekTuiCheck {
 
     // 直接用的命令名，不需要硬编码完整路径了
     private static final String CLI_COMMAND = "deepseek-tui";
-    private static EnvironmentResult environmentResult;
+    private static EnvironmentResult cachedResult;
     /**
      * 自动查找命令的完整路径
      * Windows 用 where，Linux/Mac 用 which
      */
-    private static String resolveCommandPath() {
+    public static String resolveCommandPath() {
         try {
             // 检查是否为 Windows 系统
             String os = System.getProperty("os.name").toLowerCase();
@@ -54,17 +58,18 @@ public class DeepSeekTuiCheck {
      * 检测 deepseek-tui 是否可用
      */
     public static EnvironmentResult Check() {
+        if(cachedResult != null) return cachedResult;
         try {
             // 1. 先找完整路径
             String commandPath = resolveCommandPath();
             if (commandPath == null) {
-                environmentResult = EnvironmentResult.builder()
+                cachedResult = EnvironmentResult.builder()
                         .CheckResult(false)
                         .message("ERROR: DeepSeek TUI Agent not found in PATH environment, please install it first" +
                                 "\n" + "ERROR: try npm install deepseek-tui -g to install it or " +
                                 "visit https://github.com/Hmbown/DeepSeek-TUI.git for more info")
                         .build();
-                return environmentResult;
+                return cachedResult;
             }
 
             // 2. 构建命令（用完整路径 + 参数）
@@ -84,27 +89,34 @@ public class DeepSeekTuiCheck {
             );
 
             // 4. 检查输出
+            StringBuilder versionOutput = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                versionOutput.append(line).append("\n");
             }
             reader.close();
 
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-                environmentResult = EnvironmentResult.builder()
+                cachedResult = EnvironmentResult.builder()
                         .CheckResult(true)
                         .commandPath(commandPath)
-                        .message("SUCCESS: DeepSeek TUI Agent is ready").build();
-                return environmentResult;
+                        .message("SUCCESS: DeepSeek TUI Agent is ready\nVersion: " + versionOutput.toString().trim())
+                        .build();
+                return cachedResult;
             }
-            return null;
+
+            cachedResult = EnvironmentResult.builder()
+                    .CheckResult(false)
+                    .message("ERROR: DeepSeek TUI Agent check failed. Exit code: " + exitCode)
+                    .build();
+            return cachedResult;
 
         } catch (Exception e) {
-            environmentResult = EnvironmentResult.builder()
+            cachedResult = EnvironmentResult.builder()
                     .CheckResult(false)
                     .message("Check Exception: " + e.getMessage()).build();
-            return environmentResult;
+            return cachedResult;
         }
     }
 
@@ -112,7 +124,7 @@ public class DeepSeekTuiCheck {
      * 测试入口
      */
     public static void main(String[] args) {
-        environmentResult = Check();
-        System.out.println("Check Result: " + environmentResult);
+        cachedResult = Check();
+        System.out.println("Check Result: " + cachedResult);
     }
 }

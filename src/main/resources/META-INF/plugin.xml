@@ -9,7 +9,7 @@
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor>KL_Taekwondo</vendor>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
@@ -22,6 +22,7 @@
             <li>Embedded DeepSeek Web Chat in a side tool window</li>
             <li>One-click access without leaving the IDE</li>
             <li>Stay in flow and get answers faster</li>
+            <li>Support DeepSeek Platform in the IDE side panel</li>
         </ul>
 
         <br><b>中文介绍：</b>
@@ -29,18 +30,23 @@
             <li>将 DeepSeek 网页版带入你的 IDE</li>
             <li>无需切换浏览器，侧边栏直接对话</li>
             <li>保持编码心流，更快获得帮助</li>
+            <li>支持查看DeepSeek Platform 数据</li>
         </ul>
 ]]></description>
 
     <change-notes><![CDATA[
-        <b>0.1.0</b> - Initial release
+        <b>0.1.1</b> - Initial release
         <ul>
-            <li>support DeepSeek Web Chat in the IDE side panel</li>
+            <li>support DeepSeek Platform in the IDE side panel</li>
+            <li>support refresh the browser</li>
+            <li>support All the JetBrains IDE(Maybe)</li>
         </ul>
 
-        <br><b>0.1.0</b> - 最初版发布
+        <br><b>0.1.1</b> - 最初版发布
         <ul>
-            <li>支持IDE中直接进行网页端DeepSeek对话</li>
+            <li>支持查看DeepSeek Platform 数据</li>
+            <li>支持刷新浏览器</li>
+            <li>支持所有 JetBrains IDE(Maybe)</li>
         </ul>
     ]]></change-notes>
 
@@ -57,6 +63,9 @@
         <toolWindow id="DeepSeek-Sync/深度同步"
                     factoryClass="com.kldo.DeepSeekSyncFactory"
                     icon="/META-INF/icon.svg"/>
+        <notificationGroup id="DeepSeek-Sync"
+                           displayType="BALLOON" bundle="messages.MyMessageBundle"
+                           key="notification.group.deepseek-sync"/>
     </extensions>
     <extensions defaultExtensionNs="org.jetbrains.kotlin">
         <supportsKotlinPluginMode supportsK2="true"/>
