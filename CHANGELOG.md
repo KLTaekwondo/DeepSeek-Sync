@@ -5,19 +5,6 @@
 ## [0.2.1]
 
 ### Added
-- 🤖 AI context menu (Explain/Improve/Review/Test/Comment)
-- ⌨️ Keyboard shortcuts: Ctrl+Shift+D/O/P/Q/T
-- 🖱️ Right-click selected code → "发送到 DeepSeek" submenu
-- 🎨 Unified DeepSeek icons for all actions
-
-### 新增
-- 🤖 新增 AI 代码操作二级菜单（解释/改进/检查/测试/注释）
-- ⌨️ 专属快捷键，快速调用各种 AI 能力
-- 🖱️ 选中代码右键直达
-
-## [0.2.0]
-
-### Added
 - 🌐 Custom browser tab with URL persistence & navigation (back/forward)
 - ⭐ Bookmarks (max 15) with collapsible panel
 - ↗ Open in system browser (for video sites)
@@ -33,6 +20,9 @@
 - 🎯 Smart auto-focus on chat input
 - 🖱️ Right-click "Send to DeepSeek" to send selected code
 - 📋 Clipboard fallback when JS injection fails
+- 🤖 AI context menu (Explain/Improve/Review/Test/Comment)
+- ⌨️ Keyboard shortcuts: Ctrl+Shift+D/O/P/Q/T
+- 🎨 Unified DeepSeek icons for all actions
 
 ### 新增
 - 🌐 自定义浏览器标签页，支持前进/后退导航
@@ -50,6 +40,9 @@
 - 🎯 聊天输入框自动聚焦
 - 🖱️ 右键「发送到 DeepSeek」选中代码
 - 📋 JS 注入失败时自动使用剪贴板兜底
+- 🤖 新增 AI 代码操作二级菜单（解释/改进/检查/测试/注释）
+- ⌨️ 专属快捷键，快速调用各种 AI 能力
+- 🖱️ 选中代码右键直达
 
 ## [0.1.2]
 
@@ -77,4 +70,4 @@
 
 ### 新增
 - 💬 在 IDE 侧栏中嵌入 DeepSeek 网页聊天
-- 🪟 「DeepSeek-Sync/深度同步」工具窗口，一键打开
+- 🪟「DeepSeek-Sync/深度同步」工具窗口，一键打开
