@@ -39,7 +39,7 @@ class SendToDeepSeekAction : AnAction(), DumbAware {
         val toolWindow = ToolWindowManager.getInstance(project)
             .getToolWindow(TOOL_WINDOW_ID) ?: return
         toolWindow.activate(null, true)
-        toolWindow.contentManager.getContents()
+        toolWindow.contentManager.contents
             .firstOrNull()
             ?.let { toolWindow.contentManager.setSelectedContent(it) }
     }

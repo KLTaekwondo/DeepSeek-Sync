@@ -9,7 +9,7 @@
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor>KL_Taekwondo</vendor>
-    <version>0.1.2</version>
+    <version>0.2.0</version>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
@@ -23,6 +23,7 @@
             <li>One-click access without leaving the IDE</li>
             <li>Stay in flow and get answers faster</li>
             <li>Support DeepSeek Platform in the IDE side panel</li>
+            <li>Custom URL browser with navigation and bookmarks</li>
         </ul>
 
         <br><b>中文介绍：</b>
@@ -30,20 +31,36 @@
             <li>将 DeepSeek 网页版带入你的 IDE</li>
             <li>无需切换浏览器，侧边栏直接对话</li>
             <li>保持编码心流，更快获得帮助</li>
-            <li>支持查看DeepSeek Platform 数据</li>
+            <li>支持查看 DeepSeek Platform 数据</li>
+            <li>自定义网址浏览器 + 导航 & 收藏夹</li>
         </ul>
 ]]></description>
 
     <change-notes><![CDATA[
-        <b>0.1.2</b> - Initial release
-        <ul>
-            <li>Fixed compatibility issues with Kotlin on other platforms</li>
-        </ul>
-
-        <br><b>0.1.2</b> - 最初版发布
-        <ul>
-            <li>解决了因为kotlin其他平台无法使用的问题</li>
-        </ul>
+<b>0.2.0</b><br>
+<ul>
+  <li>🌐 Custom browser tab with URL persistence</li>
+  <li>◀▶ Navigation buttons (go back / forward)</li>
+  <li>⭐ Bookmarks (max 15) with collapsible panel</li>
+  <li>↗ Open in system browser (for video sites)</li>
+  <li>🔀 Fixed tab links → auto open in custom tab</li>
+  <li>🎯 Popup windows intercepted, loaded in-plugin</li>
+  <li>⌨️ Global shortcut to toggle sidebar (Ctrl+Shift+S)</li>
+  <li>🔄 URL bar syncs with page navigation</li>
+  <li>🎨 Hover animation effects on toolbar buttons</li>
+</ul>
+<b>0.2.0 新增功能</b><br>
+<ul>
+  <li>🌐 自定义浏览器标签页，URL 持久化保存</li>
+  <li>◀▶ 前进/后退导航按钮</li>
+  <li>⭐ 收藏夹（最多 15 条），可折叠面板</li>
+  <li>↗ 系统浏览器打开（视频网站兜底）</li>
+  <li>🔀 固定标签页点链接 → 自动转到自定义页打开</li>
+  <li>🎯 弹窗拦截，在插件内打开</li>
+  <li>⌨️ 全局快捷键切换侧栏（Ctrl+Shift+S）</li>
+  <li>🔄 地址栏随页面导航自动同步</li>
+  <li>🎨 工具栏按钮悬停动效</li>
+</ul>
     ]]></change-notes>
 
     <!-- Product and plugin compatibility requirements.
