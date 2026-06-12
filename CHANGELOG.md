@@ -51,10 +51,23 @@
 - 🖱️ 右键「发送到 DeepSeek」选中代码
 - 📋 JS 注入失败时自动使用剪贴板兜底
 
+## [0.1.2]
+
+### Added
+- 🖥️ Full JetBrains IDE cross-platform support
+
+### 新增
+- 🖥️ 全面支持所有 JetBrains IDE
+
 ## [0.1.1]
 
-### Changed
-- 📝 Updated README documentation
+### Added
+- ⚡ DeepSeek Platform tab in the side panel
+- 🔄 Refresh button for web pages
+
+### 新增
+- ⚡ 支持查看 DeepSeek Platform 控制台
+- 🔄 新增刷新浏览器按钮
 
 ## [0.1.0] - Initial Release
 
