@@ -43,7 +43,7 @@ class DeepSeekSyncFactory : ToolWindowFactory {
             object : AnAction(
                 MyMessageBundle.message("action.refresh.text"),
                 MyMessageBundle.message("action.refresh.description"),
-                AllIcons.General.InlineRefresh
+                AllIcons.Actions.Refresh
             ) {
                 override fun actionPerformed(e: AnActionEvent) {
                     DeepSeekBrowserHolder.getAllBrowsers().values
