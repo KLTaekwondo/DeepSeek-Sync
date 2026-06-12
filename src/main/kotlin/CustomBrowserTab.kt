@@ -37,6 +37,7 @@ fun CustomBrowserTab() {
                 navigate(text, browser)
             })
             if (isDark) {
+                isOpaque = true
                 background = java.awt.Color(0x00, 0x00, 0x00) // 纯黑底
                 foreground = java.awt.Color(0xFF, 0xFF, 0xFF) // 白字
                 caretColor = java.awt.Color(0xFF, 0xFF, 0xFF) // 白色光标
