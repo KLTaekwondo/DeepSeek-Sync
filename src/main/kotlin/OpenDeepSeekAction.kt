@@ -7,11 +7,10 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.wm.ToolWindowManager
 
 /**
- * 全局快捷键唤出 DeepSeek 侧栏。
+ * 全局快捷键切换 DeepSeek 侧栏（唤出 / 关闭）。
  *
  * 与 SendToDeepSeekAction 不同（需要选中代码 + 复制），
- * 这个 action 单纯弹出侧栏并切换至聊天标签页，
- * 适合快速唤出 DeepSeek 开始输入。
+ * 这个 action 单纯切换侧栏显隐并默认聚焦聊天标签页。
  */
 class OpenDeepSeekAction : AnAction(), DumbAware {
 
@@ -20,10 +19,14 @@ class OpenDeepSeekAction : AnAction(), DumbAware {
         val toolWindow = ToolWindowManager.getInstance(project)
             .getToolWindow(TOOL_WINDOW_ID) ?: return
 
-        toolWindow.activate(null, true)
-        toolWindow.contentManager.contents
-            .firstOrNull()
-            ?.let { toolWindow.contentManager.setSelectedContent(it) }
+        if (toolWindow.isActive) {
+            toolWindow.hide()
+        } else {
+            toolWindow.activate(null, true)
+            toolWindow.contentManager.contents
+                .firstOrNull()
+                ?.let { toolWindow.contentManager.setSelectedContent(it) }
+        }
     }
 
     override fun getActionUpdateThread(): ActionUpdateThread {
