@@ -28,18 +28,25 @@ fun CustomBrowserTab() {
         DeepSeekBrowserHolder.getOrCreateCustomBrowser("https://chat.deepseek.com/")
     }
 
-    // Swing JTextField：LAF 自动跟随 IDE 主题
+    val isDark = UIUtil.isUnderDarcula()
+
+    // Swing JTextField：手动适配亮/暗色
     val urlField = remember {
         JTextField("https://chat.deepseek.com/").apply {
             addActionListener(ActionListener {
                 navigate(text, browser)
             })
+            if (isDark) {
+                background = java.awt.Color(0x00, 0x00, 0x00) // 纯黑底
+                foreground = java.awt.Color(0xFF, 0xFF, 0xFF) // 白字
+                caretColor = java.awt.Color(0xFF, 0xFF, 0xFF) // 白色光标
+            }
         }
     }
 
-    // 将 JBColor（亮/暗双色）转为 Compose Color
-    val panelBg = remember { jbColor(0xF5F5F5, 0x3C3F41) }
-    val btnBorder = remember { jbColor(0xD0D0D0, 0x555555) }
+    // 根据主题取色
+    val panelBg = remember { jbColor(0xF5F5F5, 0x00_00_00) }  // 亮灰 / 纯黑
+    val btnBorder = remember { jbColor(0xD0D0D0, 0x80_80_80) } // 浅灰 / 灰色
 
     Column(modifier = Modifier.fillMaxSize()) {
         // ── 地址栏 ──
