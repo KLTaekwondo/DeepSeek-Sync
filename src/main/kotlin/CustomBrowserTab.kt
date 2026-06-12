@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.SwingPanel
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.intellij.util.ui.UIUtil
+import com.intellij.util.ui.StartupUiUtil
 import org.jetbrains.jewel.ui.component.Text
 import java.awt.event.ActionListener
 import javax.swing.JTextField
@@ -35,7 +35,7 @@ fun CustomBrowserTab() {
                 navigate(text, browser)
             })
             // Darcula 下默认白底白字，设黑字保证可读
-            if (UIUtil.isUnderDarcula()) {
+            if (StartupUiUtil.isDarkTheme) {
                 foreground = java.awt.Color(0x00, 0x00, 0x00)
             }
         }
@@ -102,7 +102,7 @@ private fun navigate(url: String, browser: com.intellij.ui.jcef.JBCefBrowser?) {
 
 /** 根据 IDE 亮/暗主题返回对应 Compose Color */
 private fun jbColor(light: Int, dark: Int): Color {
-    val rgb = if (UIUtil.isUnderDarcula()) dark else light
+    val rgb = if (StartupUiUtil.isDarkTheme) dark else light
     val c = java.awt.Color(rgb)
     return Color(c.red / 255f, c.green / 255f, c.blue / 255f)
 }
