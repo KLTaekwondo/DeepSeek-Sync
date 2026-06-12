@@ -11,26 +11,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.SwingPanel
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.intellij.ide.util.PropertiesComponent
 import com.intellij.util.ui.StartupUiUtil
 import org.jetbrains.jewel.ui.component.Text
 import java.awt.event.ActionListener
 import javax.swing.JTextField
 
+/** PropertiesComponent Key：保存的自定义 URL */
+private const val PROP_CUSTOM_URL = "DeepSeekSync.customUrl"
+
 /**
  * 可自定义 URL 的浏览器标签页。
  *
  * 用户可以在地址栏输入任意网址，按回车或点击「前往」加载。
- * 默认打开 DeepSeek 聊天页。
+ * 默认打开 DeepSeek 聊天页，URL 会持久化保存。
  */
 @Composable
 fun CustomBrowserTab() {
+    // 从 PropertiesComponent 读取上次保存的 URL
+    val savedUrl = remember {
+        PropertiesComponent.getInstance()
+            .getValue(PROP_CUSTOM_URL, "https://chat.deepseek.com/")
+    }
+
     val browser = remember {
-        DeepSeekBrowserHolder.getOrCreateCustomBrowser("https://chat.deepseek.com/")
+        DeepSeekBrowserHolder.getOrCreateCustomBrowser(savedUrl)
     }
 
     // Swing JTextField
     val urlField = remember {
-        JTextField("https://chat.deepseek.com/").apply {
+        JTextField(savedUrl).apply {
             addActionListener(ActionListener {
                 navigate(text, browser)
             })
@@ -88,7 +98,7 @@ fun CustomBrowserTab() {
     }
 }
 
-/** 导航到指定 URL（自动补全 https://） */
+/** 导航到指定 URL（自动补全 https://），并持久化保存 */
 private fun navigate(url: String, browser: com.intellij.ui.jcef.JBCefBrowser?) {
     val normalized = url.trim().let {
         when {
@@ -97,6 +107,8 @@ private fun navigate(url: String, browser: com.intellij.ui.jcef.JBCefBrowser?) {
             else -> "https://$it"
         }
     }
+    // 保存到全局持久化，重启 IDE 后自动恢复
+    PropertiesComponent.getInstance().setValue(PROP_CUSTOM_URL, normalized)
     browser?.loadURL(normalized)
 }
 
