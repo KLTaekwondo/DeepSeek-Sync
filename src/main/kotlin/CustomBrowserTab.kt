@@ -28,12 +28,16 @@ fun CustomBrowserTab() {
         DeepSeekBrowserHolder.getOrCreateCustomBrowser("https://chat.deepseek.com/")
     }
 
-    // Swing JTextField：跟随 LAF 默认配色
+    // Swing JTextField
     val urlField = remember {
         JTextField("https://chat.deepseek.com/").apply {
             addActionListener(ActionListener {
                 navigate(text, browser)
             })
+            // Darcula 下默认白底白字，设黑字保证可读
+            if (UIUtil.isUnderDarcula()) {
+                foreground = java.awt.Color(0x00, 0x00, 0x00)
+            }
         }
     }
 
