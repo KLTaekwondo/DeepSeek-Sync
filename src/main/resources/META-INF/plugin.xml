@@ -69,7 +69,13 @@
                 text="发送到 DeepSeek"
                 description="将选中的代码发送到 DeepSeek 聊天（已复制到剪贴板）">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="alt shift D"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
+        </action>
+        <action id="DeepSeekSync.OpenDeepSeek"
+                class="com.kldo.OpenDeepSeekAction"
+                text="Open DeepSeek Chat"
+                description="Open DeepSeek chat sidebar">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift S"/>
         </action>
     </actions>
 </idea-plugin>
