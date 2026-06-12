@@ -33,6 +33,11 @@ class DeepSeekSyncFactory : ToolWindowFactory {
             DeepSeekWebPreview("https://platform.deepseek.com/")
         }
 
+        // 3. 自定义浏览
+        toolWindow.addComposeTab("🌐 自定义", focusOnClickInside = true) {
+            CustomBrowserTab()
+        }
+
         // 刷新按钮
         toolWindow.setTitleActions(listOf(
             object : AnAction("刷新当前网页", "刷新 DeepSeek 网页", AllIcons.General.InlineRefresh) {
