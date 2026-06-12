@@ -12,10 +12,14 @@ import androidx.compose.ui.awt.SwingPanel
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.intellij.ide.util.PropertiesComponent
+import com.intellij.ui.jcef.JBCefBrowser
 import com.intellij.util.ui.StartupUiUtil
+import org.cef.browser.CefFrame
+import org.cef.handler.CefLoadHandlerAdapter
 import org.jetbrains.jewel.ui.component.Text
 import java.awt.event.ActionListener
 import javax.swing.JTextField
+import javax.swing.SwingUtilities
 
 /** PropertiesComponent Key：保存的自定义 URL */
 private const val PROP_CUSTOM_URL = "DeepSeekSync.customUrl"
@@ -34,21 +38,45 @@ fun CustomBrowserTab() {
             .getValue(PROP_CUSTOM_URL, "https://chat.deepseek.com/")
     }
 
-    val browser = remember {
-        DeepSeekBrowserHolder.getOrCreateCustomBrowser(savedUrl)
-    }
-
-    // Swing JTextField
+    // Swing JTextField（先创建，后续再设监听）
     val urlField = remember {
         JTextField(savedUrl).apply {
-            addActionListener(ActionListener {
-                navigate(text, browser)
-            })
             // Darcula 下默认白底白字，设黑字保证可读
             if (StartupUiUtil.isDarkTheme) {
                 foreground = java.awt.Color(0x00, 0x00, 0x00)
             }
         }
+    }
+
+    val browser = remember {
+        DeepSeekBrowserHolder.getOrCreateCustomBrowser(savedUrl)
+    }
+
+    // 安装浏览器回调：页面加载后同步 URL 到地址栏 + 回车导航
+    LaunchedEffect(Unit) {
+        // JBCefClient.addLoadHandler(handler, browser) — 双参数版本
+        browser?.getJBCefClient()?.addLoadHandler(
+            object : CefLoadHandlerAdapter() {
+                override fun onLoadEnd(
+                    browser: org.cef.browser.CefBrowser,
+                    frame: CefFrame,
+                    httpStatusCode: Int
+                ) {
+                    // 只在主框架加载完成时更新地址栏
+                    if (frame.isMain) {
+                        SwingUtilities.invokeLater {
+                            urlField.text = frame.url
+                        }
+                    }
+                }
+            },
+            browser.cefBrowser
+        )
+
+        // 回车导航
+        urlField.addActionListener(ActionListener {
+            navigate(urlField.text, browser)
+        })
     }
 
     // 根据主题取色
