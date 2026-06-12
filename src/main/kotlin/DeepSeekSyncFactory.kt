@@ -23,14 +23,14 @@ class DeepSeekSyncFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         toolWindow.setAnchor(ToolWindowAnchor.RIGHT, null)
 
-        // 聊天标签页
+        // 聊天标签页（打开后自动聚焦输入框）
         toolWindow.addComposeTab(MyMessageBundle.message("tab.chat"), focusOnClickInside = true) {
-            DeepSeekWebPreview("https://chat.deepseek.com/", autoFocus = true, syncTheme = true)
+            DeepSeekWebPreview("https://chat.deepseek.com/", autoFocus = true)
         }
 
         // 控制台标签页
         toolWindow.addComposeTab(MyMessageBundle.message("tab.platform"), focusOnClickInside = true) {
-            DeepSeekWebPreview("https://platform.deepseek.com/", syncTheme = true)
+            DeepSeekWebPreview("https://platform.deepseek.com/")
         }
 
         // 3. 自定义浏览
