@@ -52,9 +52,9 @@ fun CustomBrowserTab() {
         DeepSeekBrowserHolder.getOrCreateCustomBrowser(savedUrl)
     }
 
-    // 安装浏览器回调：页面加载后同步 URL 到地址栏 + 回车导航
+    // 安装浏览器回调：URL 同步 + 回车导航
     LaunchedEffect(Unit) {
-        // JBCefClient.addLoadHandler(handler, browser) — 双参数版本
+        // 页面主框架加载完成后同步 URL 到地址栏
         browser?.getJBCefClient()?.addLoadHandler(
             object : CefLoadHandlerAdapter() {
                 override fun onLoadEnd(
