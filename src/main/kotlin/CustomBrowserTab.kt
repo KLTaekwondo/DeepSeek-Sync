@@ -28,20 +28,12 @@ fun CustomBrowserTab() {
         DeepSeekBrowserHolder.getOrCreateCustomBrowser("https://chat.deepseek.com/")
     }
 
-    val isDark = UIUtil.isUnderDarcula()
-
-    // Swing JTextField：手动适配亮/暗色
+    // Swing JTextField：跟随 LAF 默认配色
     val urlField = remember {
         JTextField("https://chat.deepseek.com/").apply {
             addActionListener(ActionListener {
                 navigate(text, browser)
             })
-            if (isDark) {
-                isOpaque = true
-                background = java.awt.Color(0x00, 0x00, 0x00) // 纯黑底
-                foreground = java.awt.Color(0xFF, 0xFF, 0xFF) // 白字
-                caretColor = java.awt.Color(0xFF, 0xFF, 0xFF) // 白色光标
-            }
         }
     }
 
