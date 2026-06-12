@@ -3,11 +3,11 @@ package com.kldo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.SwingPanel
-import org.cef.handler.CefLoadHandlerAdapter
+import kotlinx.coroutines.delay
 import org.jetbrains.jewel.ui.component.Text
 
 /**
@@ -22,25 +22,14 @@ fun DeepSeekWebPreview(url: String, autoFocus: Boolean = false) {
         DeepSeekBrowserHolder.getOrCreateBrowser(url)
     }
 
-    // 页面加载完成后自动聚焦聊天输入框
-    DisposableEffect(browser, autoFocus) {
-        if (browser == null || !autoFocus) return@DisposableEffect onDispose {}
+    // 页面加载后自动聚焦聊天输入框（延时注入 JS，等待页面 + React 渲染完成）
+    LaunchedEffect(browser, autoFocus) {
+        if (browser == null || !autoFocus) return@LaunchedEffect
 
-        val loadHandler = object : CefLoadHandlerAdapter() {
-            override fun onLoadingStateChange(
-                _browser: org.cef.browser.CefBrowser,
-                isLoading: Boolean,
-                _canGoBack: Boolean,
-                _canGoForward: Boolean
-            ) {
-                if (!isLoading) {
-                    _browser.executeJavaScript(FOCUS_SCRIPT, url, 0)
-                }
-            }
-        }
-        browser.jbCefClient.addLoadHandler(loadHandler, browser.cefBrowser)
-        onDispose {
-            browser.jbCefClient.removeLoadHandler(loadHandler, browser.cefBrowser)
+        // 分多次注入：页面没加载好 JS 内部会轮询，多次注入保底
+        for (ms in listOf(800L, 2000L, 4000L)) {
+            delay(ms)
+            browser.cefBrowser.executeJavaScript(FOCUS_SCRIPT, url, 0)
         }
     }
 
@@ -56,13 +45,17 @@ fun DeepSeekWebPreview(url: String, autoFocus: Boolean = false) {
     }
 }
 
-/** 聚焦聊天输入框的 JS 脚本（轮询等待 React 渲染完成） */
+/**
+ * 聚焦聊天输入框的 JS 脚本。
+ * - 轮询等待 React 渲染出输入框
+ * - 同时支持 <textarea> 和 contenteditable div
+ */
 private const val FOCUS_SCRIPT = """
 (function(){
     var t=0,i=setInterval(function(){
-        var e=document.querySelector('textarea');
-        if(e){e.focus();clearInterval(i)}
-        else if(++t>20)clearInterval(i)
+        var e=document.querySelector('textarea')||document.querySelector('[contenteditable="true"]');
+        if(e){e.focus();e.scrollIntoView();clearInterval(i)}
+        else if(++t>15)clearInterval(i)
     },500)
 })();
 """
