@@ -24,23 +24,27 @@ class DeepSeekSyncFactory : ToolWindowFactory {
         toolWindow.setAnchor(ToolWindowAnchor.RIGHT, null)
 
         // 聊天标签页（打开后自动聚焦输入框）
-        toolWindow.addComposeTab("DeepSeek Web Chat", focusOnClickInside = true) {
+        toolWindow.addComposeTab(MyMessageBundle.message("tab.chat"), focusOnClickInside = true) {
             DeepSeekWebPreview("https://chat.deepseek.com/", autoFocus = true)
         }
 
         // 控制台标签页
-        toolWindow.addComposeTab("DeepSeek API Platform", focusOnClickInside = true) {
+        toolWindow.addComposeTab(MyMessageBundle.message("tab.platform"), focusOnClickInside = true) {
             DeepSeekWebPreview("https://platform.deepseek.com/")
         }
 
         // 3. 自定义浏览
-        toolWindow.addComposeTab("🌐 自定义", focusOnClickInside = true) {
+        toolWindow.addComposeTab(MyMessageBundle.message("tab.custom"), focusOnClickInside = true) {
             CustomBrowserTab()
         }
 
         // 刷新按钮
         toolWindow.setTitleActions(listOf(
-            object : AnAction("刷新当前网页", "刷新 DeepSeek 网页", AllIcons.General.InlineRefresh) {
+            object : AnAction(
+                MyMessageBundle.message("action.refresh.text"),
+                MyMessageBundle.message("action.refresh.description"),
+                AllIcons.General.InlineRefresh
+            ) {
                 override fun actionPerformed(e: AnActionEvent) {
                     DeepSeekBrowserHolder.getAllBrowsers().values
                         .find { it?.component?.isShowing == true }

@@ -35,12 +35,12 @@ class SendToDeepSeekAction : AnAction(), DumbAware {
             )
         }
 
-        // 3. 打开侧边栏并切换到聊天标签页
+        // 3. 打开侧边栏并切换到聊天标签页（第一个 tab 始终是聊天）
         val toolWindow = ToolWindowManager.getInstance(project)
             .getToolWindow(TOOL_WINDOW_ID) ?: return
         toolWindow.activate(null, true)
         toolWindow.contentManager.getContents()
-            .firstOrNull { it.displayName == CHAT_TAB_NAME }
+            .firstOrNull()
             ?.let { toolWindow.contentManager.setSelectedContent(it) }
     }
 
@@ -60,7 +60,6 @@ class SendToDeepSeekAction : AnAction(), DumbAware {
     companion object {
         private const val CHAT_URL = "https://chat.deepseek.com/"
         private const val TOOL_WINDOW_ID = "DeepSeek-Sync/深度同步"
-        private const val CHAT_TAB_NAME = "DeepSeek Web Chat"
 
         /**
          * 生成 JS 注入脚本，将代码填入 DeepSeek 聊天的输入框

@@ -35,7 +35,7 @@ fun DeepSeekWebPreview(url: String, autoFocus: Boolean = false) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         if (browser == null) {
-            Text("当前环境不支持 JCEF，无法显示网页")
+            Text(MyMessageBundle.message("ui.jcef.not.supported"))
         } else {
             SwingPanel(
                 modifier = Modifier.fillMaxSize().weight(1f),

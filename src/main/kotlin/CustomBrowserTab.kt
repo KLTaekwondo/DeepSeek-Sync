@@ -67,7 +67,7 @@ fun CustomBrowserTab() {
                     .border(1.dp, btnBorder, RoundedCornerShape(4.dp))
                     .padding(horizontal = 12.dp, vertical = 5.dp)
             ) {
-                Text("前往")
+                Text(MyMessageBundle.message("ui.custom.url.go"))
             }
         }
 
@@ -77,7 +77,7 @@ fun CustomBrowserTab() {
                 modifier = Modifier.fillMaxSize().padding(24.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Text("当前环境不支持 JCEF，无法显示网页")
+                Text(MyMessageBundle.message("ui.jcef.not.supported"))
             }
         } else {
             SwingPanel(
