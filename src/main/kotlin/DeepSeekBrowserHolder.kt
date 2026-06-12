@@ -9,11 +9,17 @@ object DeepSeekBrowserHolder {
     private val instances = mutableMapOf<String, JBCefBrowser?>()
     private const val CUSTOM_KEY = "__custom_browser__"
 
+    /**
+     * 固定标签页点击链接时回调。
+     * 用于通知 DeepSeekSyncFactory 自动切到自定义标签页。
+     */
+    var onRedirectToCustom: ((url: String) -> Unit)? = null
+
     /** 按 URL 缓存获取/创建浏览器（用于固定 tab） */
     fun getOrCreateBrowser(url: String): JBCefBrowser? {
         return instances.getOrPut(url) {
             if (JBCefApp.isSupported()) {
-                JBCefBrowser(url)
+                JBCefBrowser(url).also { installRedirectHandler(it) }
             } else null
         }
     }
@@ -28,8 +34,28 @@ object DeepSeekBrowserHolder {
     }
 
     /**
-     * 拦截链接弹窗，改为在当前浏览器中加载。
-     * 防止 JCEF 默认的 "Server with Chromium Embedded Framework" 弹窗。
+     * 固定标签页弹窗拦截：URL 改发到自定义浏览器加载 + 自动切标签。
+     */
+    private fun installRedirectHandler(browser: JBCefBrowser) {
+        browser.getJBCefClient().addLifeSpanHandler(
+            object : CefLifeSpanHandlerAdapter() {
+                override fun onBeforePopup(
+                    browser: org.cef.browser.CefBrowser,
+                    frame: CefFrame,
+                    targetUrl: String,
+                    targetFrameName: String
+                ): Boolean {
+                    getOrCreateCustomBrowser()?.loadURL(targetUrl)
+                    onRedirectToCustom?.invoke(targetUrl)
+                    return true // cancel popup
+                }
+            },
+            browser.cefBrowser
+        )
+    }
+
+    /**
+     * 自定义标签页弹窗拦截：在当前浏览器加载。
      */
     private fun installPopupHandler(browser: JBCefBrowser) {
         browser.getJBCefClient().addLifeSpanHandler(

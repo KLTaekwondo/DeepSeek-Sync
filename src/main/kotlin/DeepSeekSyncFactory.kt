@@ -9,6 +9,7 @@ import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowAnchor
 import com.intellij.openapi.wm.ToolWindowFactory
 import org.jetbrains.jewel.bridge.addComposeTab
+import javax.swing.SwingUtilities
 
 /**
  * 侧边栏工具窗口工厂。
@@ -33,9 +34,19 @@ class DeepSeekSyncFactory : ToolWindowFactory {
             DeepSeekWebPreview("https://platform.deepseek.com/")
         }
 
-        // 3. 自定义浏览
+        // 自定义浏览
         toolWindow.addComposeTab(MyMessageBundle.message("tab.custom"), focusOnClickInside = true) {
             CustomBrowserTab()
+        }
+
+        // 固定标签页点链接 → 自动切到自定义标签页
+        DeepSeekBrowserHolder.onRedirectToCustom = { _ ->
+            SwingUtilities.invokeLater {
+                val contents = toolWindow.contentManager.contents
+                if (contents.size >= 3) {
+                    toolWindow.contentManager.setSelectedContent(contents[2])
+                }
+            }
         }
 
         // 刷新按钮
