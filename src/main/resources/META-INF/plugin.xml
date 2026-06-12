@@ -39,10 +39,10 @@
     <change-notes><![CDATA[
 <b>0.2.1</b><br>
 <ul>
-  <li>🤖 AI 右键菜单（解释/改进/检查/测试/注释）</li>
-  <li>⌨️ 快捷键：Ctrl+Shift+D/O/P/Q/T 一键调用</li>
-  <li>🖱️ 选中代码后右键「发送到 DeepSeek」弹出子菜单</li>
-  <li>🎨 所有操作统一使用 DeepSeek 图标</li>
+  <li>🤖 AI context menu (Explain/Improve/Review/Test/Comment)</li>
+  <li>⌨️ Keyboard shortcuts: Ctrl+Shift+D/O/P/Q/T</li>
+  <li>🖱️ Right-click selected code → "发送到 DeepSeek" submenu</li>
+  <li>🎨 Unified DeepSeek icons for all actions</li>
 </ul>
 <b>0.2.1 新增功能</b><br>
 <ul>
