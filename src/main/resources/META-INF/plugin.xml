@@ -9,7 +9,7 @@
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor>KL_Taekwondo</vendor>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
@@ -37,6 +37,19 @@
 ]]></description>
 
     <change-notes><![CDATA[
+<b>0.2.1</b><br>
+<ul>
+  <li>🤖 AI 右键菜单（解释/改进/检查/测试/注释）</li>
+  <li>⌨️ 快捷键：Ctrl+Shift+D/O/P/Q/T 一键调用</li>
+  <li>🖱️ 选中代码后右键「发送到 DeepSeek」弹出子菜单</li>
+  <li>🎨 所有操作统一使用 DeepSeek 图标</li>
+</ul>
+<b>0.2.1 新增功能</b><br>
+<ul>
+  <li>🤖 新增 AI 代码操作二级菜单</li>
+  <li>⌨️ 专属快捷键，快速调用各种 AI 能力</li>
+  <li>🖱️ 选中代码右键直达</li>
+</ul>
 <b>0.2.0</b><br>
 <ul>
   <li>🌐 Custom browser tab with URL persistence</li>
@@ -74,25 +87,67 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="DeepSeek-Sync/深度同步"
                     factoryClass="com.kldo.DeepSeekSyncFactory"
-                    icon="/META-INF/icon.svg"/>
+                    icon="/META-INF/actionIcon.svg"/>
         <notificationGroup id="DeepSeek-Sync"
                            displayType="BALLOON" bundle="messages.MyMessageBundle"
                            key="notification.group.deepseek-sync"/>
     </extensions>
 
     <actions>
-        <action id="DeepSeekSync.SendToDeepSeek"
-                class="com.kldo.SendToDeepSeekAction"
-                text="发送到 DeepSeek"
-                description="将选中的代码发送到 DeepSeek 聊天（已复制到剪贴板）">
+        <group id="DeepSeekSync.DeepSeekAIActions"
+               class="com.kldo.DeepSeekAIActionGroup"
+               text="发送到 DeepSeek"
+               description="更多 DeepSeek Sync 操作"
+               icon="/META-INF/actionIcon.svg"
+               popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+
+            <action id="DeepSeekSync.ExplainCode"
+                    class="com.kldo.DeepSeekAIAction"
+                    text="📖 解释代码"
+                    description="解释选中代码的作用和工作原理">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
-        </action>
+            </action>
+
+            <action id="DeepSeekSync.ImproveCode"
+                    class="com.kldo.DeepSeekAIAction"
+                    text="✨ 改进代码"
+                    description="分析选中代码并提出改进建议">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift O"/>
+            </action>
+            <action id="DeepSeekSync.ReviewCode"
+                    class="com.kldo.DeepSeekAIAction"
+                    text="🔍 检查代码"
+                    description="检查选中代码中可能存在的 Bug 和问题">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift P"/>
+            </action>
+            <action id="DeepSeekSync.TestCode"
+                    class="com.kldo.DeepSeekAIAction"
+                    text="🧪 编写测试"
+                    description="为选中代码编写单元测试">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift Q"/>
+            </action>
+            <action id="DeepSeekSync.CommentCode"
+                    class="com.kldo.DeepSeekAIAction"
+                    text="💬 添加注释"
+                    description="为选中代码添加中文注释">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift T"/>
+            </action>
+        </group>
+
         <action id="DeepSeekSync.OpenDeepSeek"
                 class="com.kldo.OpenDeepSeekAction"
-                text="Open DeepSeek Chat"
-                description="Open DeepSeek chat sidebar">
+                icon="/META-INF/actionIcon.svg"
+                text="打开 DeepSeek 聊天"
+                description="打开 DeepSeek 聊天侧栏">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift S"/>
+        </action>
+        <action id="DeepSeekSync.ExplainTerminalError"
+                class="com.kldo.ExplainTerminalErrorAction"
+                icon="/META-INF/actionIcon.svg"
+                text="向 DeepSeek 解释此错误"
+                description="分析终端错误并给出修复方案">
+            <add-to-group group-id="Terminal.ReworkedTerminalContextMenu" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>

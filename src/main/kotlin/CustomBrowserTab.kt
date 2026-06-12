@@ -28,7 +28,7 @@ import com.google.gson.reflect.TypeToken
 import com.intellij.ide.BrowserUtil
 import com.intellij.ide.util.PropertiesComponent
 import com.intellij.ui.jcef.JBCefBrowser
-import com.intellij.util.ui.StartupUiUtil
+import com.intellij.ui.JBColor
 import org.cef.browser.CefFrame
 import org.cef.handler.CefLoadHandlerAdapter
 import org.jetbrains.jewel.ui.component.Text
@@ -57,7 +57,7 @@ fun CustomBrowserTab() {
     val urlField = remember {
         JTextField(savedUrl).apply {
             // Darcula 下默认白底白字，设黑字保证可读
-            if (StartupUiUtil.isDarkTheme) {
+            if (!JBColor.isBright()) {
                 foreground = java.awt.Color(0x00, 0x00, 0x00)
             }
         }
@@ -304,7 +304,7 @@ private fun NavButton(
     val bgColor by animateColorAsState(
         targetValue = when {
             !isHovered -> Color.Transparent
-            StartupUiUtil.isDarkTheme -> Color(0x30_FFFFFF) // 暗色：浅色遮罩
+            !JBColor.isBright() -> Color(0x30_FFFFFF) // 暗色：浅色遮罩
             else -> Color(0x18_000000)                     // 亮色：深色遮罩
         },
         animationSpec = tween(durationMillis = 200),
@@ -340,7 +340,7 @@ private fun navigate(url: String, browser: com.intellij.ui.jcef.JBCefBrowser?) {
 
 /** 根据 IDE 亮/暗主题返回对应 Compose Color */
 private fun jbColor(light: Int, dark: Int): Color {
-    val rgb = if (StartupUiUtil.isDarkTheme) dark else light
+    val rgb = if (!JBColor.isBright()) dark else light
     val c = java.awt.Color(rgb)
     return Color(c.red / 255f, c.green / 255f, c.blue / 255f)
 }
