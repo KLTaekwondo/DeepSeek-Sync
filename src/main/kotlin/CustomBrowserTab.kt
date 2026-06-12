@@ -1,6 +1,7 @@
 package com.kldo
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.SwingPanel
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.intellij.ui.jcef.JBCefBrowser
+import com.intellij.util.ui.UIUtil
 import org.jetbrains.jewel.ui.component.Text
 import java.awt.event.ActionListener
 import javax.swing.JTextField
@@ -27,7 +28,7 @@ fun CustomBrowserTab() {
         DeepSeekBrowserHolder.getOrCreateCustomBrowser("https://chat.deepseek.com/")
     }
 
-    // Swing JTextField：支持原生回车事件
+    // Swing JTextField：LAF 自动跟随 IDE 主题
     val urlField = remember {
         JTextField("https://chat.deepseek.com/").apply {
             addActionListener(ActionListener {
@@ -36,11 +37,15 @@ fun CustomBrowserTab() {
         }
     }
 
+    // 将 JBColor（亮/暗双色）转为 Compose Color
+    val panelBg = remember { jbColor(0xF5F5F5, 0x3C3F41) }
+    val btnBorder = remember { jbColor(0xD0D0D0, 0x555555) }
+
     Column(modifier = Modifier.fillMaxSize()) {
         // ── 地址栏 ──
         Row(
             modifier = Modifier.fillMaxWidth()
-                .background(Color(0xFFF5F5F5))
+                .background(panelBg)
                 .padding(horizontal = 8.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -51,12 +56,12 @@ fun CustomBrowserTab() {
 
             Spacer(Modifier.width(6.dp))
 
-            // 前往按钮
+            // 前往按钮（点击区域）
             Box(
                 modifier = Modifier
                     .clickable { navigate(urlField.text, browser) }
-                    .background(Color(0xFFE0E0E0), RoundedCornerShape(4.dp))
-                    .padding(horizontal = 12.dp, vertical = 6.dp)
+                    .border(1.dp, btnBorder, RoundedCornerShape(4.dp))
+                    .padding(horizontal = 12.dp, vertical = 5.dp)
             ) {
                 Text("前往")
             }
@@ -80,7 +85,7 @@ fun CustomBrowserTab() {
 }
 
 /** 导航到指定 URL（自动补全 https://） */
-private fun navigate(url: String, browser: JBCefBrowser?) {
+private fun navigate(url: String, browser: com.intellij.ui.jcef.JBCefBrowser?) {
     val normalized = url.trim().let {
         when {
             it.isBlank() -> return
@@ -89,4 +94,11 @@ private fun navigate(url: String, browser: JBCefBrowser?) {
         }
     }
     browser?.loadURL(normalized)
+}
+
+/** 根据 IDE 亮/暗主题返回对应 Compose Color */
+private fun jbColor(light: Int, dark: Int): Color {
+    val rgb = if (UIUtil.isUnderDarcula()) dark else light
+    val c = java.awt.Color(rgb)
+    return Color(c.red / 255f, c.green / 255f, c.blue / 255f)
 }
