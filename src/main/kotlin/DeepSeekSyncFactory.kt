@@ -1,10 +1,14 @@
 package com.kldo
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.IconLoader
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowAnchor
 import com.intellij.openapi.wm.ToolWindowFactory
@@ -13,9 +17,7 @@ import javax.swing.SwingUtilities
 
 /**
  * 侧边栏工具窗口工厂。
- *
- * 实现 ToolWindowFactory 必然继承 isApplicable / isDoNotActivateOnStart 等
- * 过时接口方法，这是平台级约束，所有插件都如此。JetBrains 移除前会提供迁移路径。
+ * 无 tab 栏，通过标题栏图标按钮切换页面。
  */
 class DeepSeekSyncFactory : ToolWindowFactory {
 
@@ -24,33 +26,44 @@ class DeepSeekSyncFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         toolWindow.setAnchor(ToolWindowAnchor.RIGHT, null)
 
-        // 聊天标签页（打开后自动聚焦输入框）
-        toolWindow.addComposeTab(MyMessageBundle.message("tab.chat"), focusOnClickInside = true) {
-            DeepSeekWebPreview("https://chat.deepseek.com/", autoFocus = true)
-        }
+        // 共享状态：当前选中页
+        var selectedTab by mutableStateOf(0)
 
-        // 控制台标签页
-        toolWindow.addComposeTab(MyMessageBundle.message("tab.platform"), focusOnClickInside = true) {
-            DeepSeekWebPreview("https://platform.deepseek.com/")
-        }
-
-        // 自定义浏览
-        toolWindow.addComposeTab(MyMessageBundle.message("tab.custom"), focusOnClickInside = true) {
-            CustomBrowserTab()
-        }
-
-        // 固定标签页点链接 → 自动切到自定义标签页
+        // 重定向
         DeepSeekBrowserHolder.onRedirectToCustom = { _ ->
-            SwingUtilities.invokeLater {
-                val contents = toolWindow.contentManager.contents
-                if (contents.size >= 3) {
-                    toolWindow.contentManager.setSelectedContent(contents[2])
-                }
+            SwingUtilities.invokeLater { selectedTab = 2 }
+        }
+        DeepSeekBrowserHolder.onSwitchToChat = {
+            SwingUtilities.invokeLater { selectedTab = 0 }
+        }
+
+        // 单个 content（无 tab 栏）
+        toolWindow.addComposeTab("", focusOnClickInside = true) {
+            when (selectedTab) {
+                0 -> DeepSeekWebPreview("https://chat.deepseek.com/", autoFocus = true)
+                1 -> DeepSeekWebPreview("https://platform.deepseek.com/")
+                2 -> CustomBrowserTab()
             }
         }
 
-        // 刷新按钮
+        // 图标按钮
+        val chatIcon = IconLoader.getIcon("/META-INF/tabChat.svg", javaClass)
+        val platformIcon = IconLoader.getIcon("/META-INF/tabPlatform.svg", javaClass)
+        val globeIcon = IconLoader.getIcon("/META-INF/tabGlobe.svg", javaClass)
+
         toolWindow.setTitleActions(listOf(
+            object : AnAction("Chat", "切换到聊天", chatIcon) {
+                override fun actionPerformed(e: AnActionEvent) { selectedTab = 0 }
+                override fun getActionUpdateThread() = ActionUpdateThread.EDT
+            },
+            object : AnAction("Platform", "切换到控制台", platformIcon) {
+                override fun actionPerformed(e: AnActionEvent) { selectedTab = 1 }
+                override fun getActionUpdateThread() = ActionUpdateThread.EDT
+            },
+            object : AnAction("Custom", "切换到自定义", globeIcon) {
+                override fun actionPerformed(e: AnActionEvent) { selectedTab = 2 }
+                override fun getActionUpdateThread() = ActionUpdateThread.EDT
+            },
             object : AnAction(
                 MyMessageBundle.message("action.refresh.text"),
                 MyMessageBundle.message("action.refresh.description"),
@@ -61,10 +74,7 @@ class DeepSeekSyncFactory : ToolWindowFactory {
                         .find { it?.component?.isShowing == true }
                         ?.cefBrowser?.reload()
                 }
-
-                override fun getActionUpdateThread(): ActionUpdateThread {
-                    return ActionUpdateThread.EDT
-                }
+                override fun getActionUpdateThread() = ActionUpdateThread.EDT
             }
         ))
     }

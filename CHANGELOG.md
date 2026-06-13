@@ -2,6 +2,30 @@
 
 # Deepseek-sync Changelog
 
+## [0.3.0]
+
+### Added
+- ⚙️ Customizable AI prompt templates (5 slots) via Settings panel
+- 🧠 PSI context variables: `{class}`, `{method}`, `{package}`, `{imports}` in templates
+- 🔄 PSI variables added to default templates — AI sees file, class, method context automatically
+- 🖼️ Tool window title bar icon buttons (chat/platform/custom/refresh) — no more text tabs
+- ⚡ Settings action in right-click "Send to DeepSeek" popup menu
+- 🏷️ Convention-based action localization via `<resource-bundle>`
+
+### Fixed
+- 🔁 Auto-switch to chat tab when sending code from any tab
+
+### 新增
+- ⚙️ 自定义 AI 提示词模板（5 个槽位），支持设置面板编辑
+- 🧠 PSI 上下文变量：`{class}` `{method}` `{package}` `{imports}` 自动注入
+- 🔄 默认模板已包含 PSI 上下文，AI 自动获取文件/类/方法信息
+- 🖼️ 标题栏图标按钮切换页面（聊天/控制台/自定义/刷新），去掉文本标签页
+- ⚡ 右键菜单新增「设置」入口
+- 🏷️ 基于 `<resource-bundle>` 约定的 Action 本地化
+
+### 修复
+- 🔁 发送代码时自动跳转到聊天标签页
+
 ## [0.2.2]
 
 ### Added

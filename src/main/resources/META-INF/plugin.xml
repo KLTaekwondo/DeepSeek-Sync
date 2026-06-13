@@ -9,7 +9,7 @@
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor>KL_Taekwondo</vendor>
-    <version>0.2.2</version>
+    <version>0.3.0</version>
     <resource-bundle>messages.MyMessageBundle</resource-bundle>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
@@ -92,6 +92,10 @@
         <notificationGroup id="DeepSeek-Sync"
                            displayType="BALLOON" bundle="messages.MyMessageBundle"
                            key="notification.group.deepseek-sync"/>
+        <applicationConfigurable instance="com.kldo.DeepSeekSyncPromptConfigurable"
+                                  parentId="tools"
+                                  id="com.kldo.DeepSeekSyncPromptConfigurable"
+                                  displayName="DeepSeek-Sync"/>
     </extensions>
 
     <actions>
@@ -122,6 +126,9 @@
                     class="com.kldo.DeepSeekAIAction">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift T"/>
             </action>
+
+            <action id="DeepSeekSync.OpenSettings"
+                    class="com.kldo.OpenSettingsAction"/>
         </group>
 
         <action id="DeepSeekSync.OpenDeepSeek"

@@ -36,9 +36,7 @@ object DeepSeekInjector {
         val toolWindow = ToolWindowManager.getInstance(project)
             .getToolWindow(TOOL_WINDOW_ID) ?: return
         toolWindow.activate(null, true)
-        toolWindow.contentManager.contents
-            .firstOrNull()
-            ?.let { toolWindow.contentManager.setSelectedContent(it) }
+        DeepSeekBrowserHolder.onSwitchToChat?.invoke()
     }
 
     /**

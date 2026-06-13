@@ -19,6 +19,12 @@ object DeepSeekBrowserHolder {
      */
     var onRedirectToCustom: ((url: String) -> Unit)? = null
 
+    /**
+     * 发送代码到 DeepSeek 时回调。
+     * 用于通知 DeepSeekSyncFactory 自动切到聊天标签页（tab 0）。
+     */
+    var onSwitchToChat: (() -> Unit)? = null
+
     /** 按 URL 缓存获取/创建浏览器（用于固定 tab） */
     fun getOrCreateBrowser(url: String): JBCefBrowser? {
         return instances.getOrPut(url) {
