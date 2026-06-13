@@ -53,6 +53,12 @@ class DeepSeekAIAction : AnAction(), DumbAware {
             e.project != null &&
             editor != null &&
             editor.selectionModel.hasSelection()
+        // 从设置读取自定义标签，同步到右键菜单
+        if (e.presentation.isVisible) {
+            val actionId = ActionManager.getInstance().getId(this) ?: return
+            val slot = slotFor(actionId)
+            e.presentation.text = slot.label
+        }
     }
 
     override fun getActionUpdateThread() = ActionUpdateThread.EDT
