@@ -63,8 +63,8 @@ Bring DeepSeek into your IDE — seamless side panel integration with AI code ac
 
 ## Usage / 使用说明
 
-1. After installation, locate the **DeepSeek-Sync icon** in the left sidebar, below the file tree buttons (or click `View → Tool Windows → DeepSeek-Sync`)  
-   安装后，在**左侧边栏**找到 **DeepSeek-Sync 图标**，位置在文件树按钮下方（或点击 `视图 → 工具窗口 → DeepSeek-Sync`）
+1. After installation, locate the **DeepSeek-Sync icon** in the right sidebar, below the file tree buttons (or click `View → Tool Windows → DeepSeek-Sync`)  
+   安装后，在**右侧边栏**找到 **DeepSeek-Sync 图标**，位置在文件树按钮下方（或点击 `视图 → 工具窗口 → DeepSeek-Sync`）
 
 2. Click to open the tool window / 点击打开工具窗口
 
