@@ -106,16 +106,19 @@ class DeepSeekSyncPromptConfigurable : Configurable {
         c.fill = GridBagConstraints.BOTH; c.weightx = 1.0; c.weighty = 0.0
         c.insets = Insets(8, 8, 2, 8)
         val varModel = object : DefaultTableModel(
-            arrayOf<Any>("Variable", "Description"), 0) {
+            arrayOf<Any>(
+                MyMessageBundle.message("settings.variables.column.name"),
+                MyMessageBundle.message("settings.variables.column.description")
+            ), 0) {
             override fun isCellEditable(row: Int, col: Int) = false
         }
         listOf(
-            arrayOf<Any>("{selection}", "selected code"),
-            arrayOf<Any>("{file}", "file name"),
-            arrayOf<Any>("{class}", "enclosing class name"),
-            arrayOf<Any>("{method}", "enclosing method name"),
-            arrayOf<Any>("{package}", "package name"),
-            arrayOf<Any>("{imports}", "file imports"),
+            arrayOf<Any>("{selection}", MyMessageBundle.message("settings.variable.desc.selection")),
+            arrayOf<Any>("{file}", MyMessageBundle.message("settings.variable.desc.file")),
+            arrayOf<Any>("{class}", MyMessageBundle.message("settings.variable.desc.class")),
+            arrayOf<Any>("{method}", MyMessageBundle.message("settings.variable.desc.method")),
+            arrayOf<Any>("{package}", MyMessageBundle.message("settings.variable.desc.package")),
+            arrayOf<Any>("{imports}", MyMessageBundle.message("settings.variable.desc.imports")),
         ).forEach { varModel.addRow(it) }
         val varTable = JBTable(varModel).apply {
             setShowGrid(false)

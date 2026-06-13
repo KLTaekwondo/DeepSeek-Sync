@@ -34,7 +34,7 @@
         <b>How to use:</b>
         <ol>
             <li>Install the plugin and restart your IDE</li>
-            <li>Click the DeepSeek-Sync icon in the right sidebar (below file tree buttons)</li>
+            <li>Click the DeepSeek-Sync icon in the right sidebar</li>
             <li>Log into your DeepSeek account in the embedded browser</li>
             <li>Select code in the editor, right-click → <b>Send to DeepSeek Sync</b> → choose an action</li>
         </ol>
@@ -55,7 +55,7 @@
         <b>使用方法：</b>
         <ol>
             <li>安装插件后重启 IDE</li>
-            <li>点击右侧边栏文件树按钮下方的 DeepSeek-Sync 图标</li>
+            <li>点击右侧边栏的 DeepSeek-Sync 图标</li>
             <li>在嵌入的浏览器中登录 DeepSeek 账号</li>
             <li>在编辑器中选中代码，右键 → <b>发送到 DeepSeek Sync</b> → 选择操作</li>
         </ol>
