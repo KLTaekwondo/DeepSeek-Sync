@@ -1,10 +1,20 @@
 package com.kldo
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread
+import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.project.DumbAware
 
 /**
- * 「DeepSeek AI」二级菜单的 ActionGroup。
+ * 「发送到 DeepSeek」二级菜单的 ActionGroup。
  * 只负责弹出子菜单，可见性和启用状态由各子项自行控制。
  */
-class DeepSeekAIActionGroup : DefaultActionGroup(null, true), DumbAware
+class DeepSeekAIActionGroup : DefaultActionGroup(null, true), DumbAware {
+
+    override fun update(e: AnActionEvent) {
+        e.presentation.text = MyMessageBundle.message("action.send.group.text")
+        e.presentation.description = MyMessageBundle.message("action.send.group.description")
+    }
+
+    override fun getActionUpdateThread() = ActionUpdateThread.EDT
+}

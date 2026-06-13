@@ -2,6 +2,22 @@
 
 # Deepseek-sync Changelog
 
+## [0.2.2]
+
+### Added
+- 🌍 Resource bundles for 日本語・한국어・Français・Deutsch・Русский
+
+### Fixed
+- 🔗 URL not saved on in-page navigation (restore last visited page on restart)
+- 🌐 Action text not localized — `<resource-bundle>` unsupported in 2025.3, switched to programmatic bundle lookup in `update()`
+
+### 新增
+- 🌍 新增多语言资源包：日语・韩语・法语・德语・俄语
+
+### 修复
+- 🔗 页面内导航不保存 URL，重启后恢复最后浏览地址
+- 🌐 🐞 字典不生效的 Bug — 2025.3 不支持 `<resource-bundle>`，改为 `update()` 动态读取 bundle
+
 ## [0.2.1]
 
 ### Added

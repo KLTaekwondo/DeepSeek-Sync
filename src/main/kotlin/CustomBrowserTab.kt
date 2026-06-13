@@ -80,11 +80,12 @@ fun CustomBrowserTab() {
                     frame: CefFrame,
                     httpStatusCode: Int
                 ) {
-                    // 只在主框架加载完成时更新地址栏
+                    // 只在主框架加载完成时更新地址栏并持久化
                     if (frame.isMain) {
                         SwingUtilities.invokeLater {
                             urlField.text = frame.url
                             currentUrl = frame.url
+                            PropertiesComponent.getInstance().setValue(PROP_CUSTOM_URL, frame.url)
                         }
                     }
                 }

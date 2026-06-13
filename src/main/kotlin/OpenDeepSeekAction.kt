@@ -29,6 +29,11 @@ class OpenDeepSeekAction : AnAction(), DumbAware {
         }
     }
 
+    override fun update(e: AnActionEvent) {
+        e.presentation.text = MyMessageBundle.message("action.open.text")
+        e.presentation.description = MyMessageBundle.message("action.open.description")
+    }
+
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.EDT
     }

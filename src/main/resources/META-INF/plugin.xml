@@ -9,7 +9,7 @@
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor>KL_Taekwondo</vendor>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
