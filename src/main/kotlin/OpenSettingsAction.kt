@@ -15,7 +15,7 @@ class OpenSettingsAction : AnAction(), DumbAware {
     override fun actionPerformed(e: AnActionEvent) {
         ShowSettingsUtil.getInstance().showSettingsDialog(
             e.project,
-            "com.kldo.DeepSeekSyncPromptConfigurable"
+            DeepSeekSyncPromptConfigurable::class.java
         )
     }
 
