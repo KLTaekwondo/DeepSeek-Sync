@@ -28,7 +28,7 @@ class DeepSeekSyncPromptConfigurable : Configurable {
         var row = 0
 
         // 标题
-        main.add(JLabel("Customize AI prompt templates — {selection} will be replaced with the selected code."),
+        main.add(JLabel(MyMessageBundle.message("settings.title")),
             gb.apply { gridy = row++; insets = Insets(4, 8, 4, 8) })
 
         // 分隔线
@@ -43,13 +43,14 @@ class DeepSeekSyncPromptConfigurable : Configurable {
             sf.templateArea.text = slot.template
 
             val panel = JPanel(GridBagLayout())
-            panel.border = BorderFactory.createTitledBorder("Prompt #${i + 1}")
+            panel.border = BorderFactory.createTitledBorder(
+                MyMessageBundle.message("settings.prompt.number", i + 1))
 
             val c = GridBagConstraints()
             // Label → field
             c.gridx = 0; c.gridy = 0; c.anchor = GridBagConstraints.WEST
             c.insets = Insets(2, 5, 2, 5)
-            panel.add(JLabel("Label:"), c)
+            panel.add(JLabel(MyMessageBundle.message("settings.label")), c)
 
             c.gridx = 1; c.gridy = 0; c.fill = GridBagConstraints.HORIZONTAL
             c.weightx = 1.0
@@ -58,7 +59,7 @@ class DeepSeekSyncPromptConfigurable : Configurable {
             // Template → textarea
             c.gridx = 0; c.gridy = 1; c.fill = GridBagConstraints.NONE
             c.weightx = 0.0; c.anchor = GridBagConstraints.NORTHWEST
-            panel.add(JLabel("Template:"), c)
+            panel.add(JLabel(MyMessageBundle.message("settings.template")), c)
 
             c.gridx = 1; c.gridy = 1; c.fill = GridBagConstraints.BOTH
             c.weightx = 1.0; c.weighty = 1.0
@@ -70,19 +71,20 @@ class DeepSeekSyncPromptConfigurable : Configurable {
         }
 
         // 变量提示
-        main.add(JLabel("<html>Available variables:<br>" +
-                "&nbsp;&nbsp;<b>{selection}</b> — selected code<br>" +
-                "&nbsp;&nbsp;<b>{file}</b> — file name<br>" +
-                "&nbsp;&nbsp;<b>{class}</b> — enclosing class name<br>" +
-                "&nbsp;&nbsp;<b>{method}</b> — enclosing method name<br>" +
-                "&nbsp;&nbsp;<b>{package}</b> — package name<br>" +
-                "&nbsp;&nbsp;<b>{imports}</b> — file imports</html>"),
+        main.add(JLabel(MyMessageBundle.message("settings.variables.hint")),
             gb.apply { gridy = row++; fill = GridBagConstraints.HORIZONTAL; weighty = 0.0; insets = Insets(4, 8, 4, 8) })
 
         // 重置按钮
-        main.add(JButton("Reset to Defaults").also { btn ->
+        main.add(JButton(MyMessageBundle.message("settings.reset")).also { btn ->
             btn.addActionListener { resetToDefaults() }
-        }, gb.apply { gridy = row; insets = Insets(8, 8, 8, 8) })
+        }, gb.apply { gridy = row++; insets = Insets(8, 8, 8, 8) })
+
+        // 维护期告示
+        main.add(JLabel(MyMessageBundle.message("settings.maintenance.notice")).also {
+            it.foreground = javax.swing.UIManager.getColor("Label.disabledForeground")
+                ?: java.awt.Color.GRAY
+            it.font = it.font.deriveFont(it.font.size * 0.9f)
+        }, gb.apply { gridy = row; insets = Insets(2, 8, 8, 8) })
 
         return JScrollPane(main)
     }
