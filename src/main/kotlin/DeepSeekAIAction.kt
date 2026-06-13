@@ -27,15 +27,6 @@ class DeepSeekAIAction : AnAction(), DumbAware {
     }
 
     override fun update(e: AnActionEvent) {
-        val actionId = ActionManager.getInstance().getId(this)
-
-        // 从字典设置本地化文本
-        val bundleKey = TEXT_MAP[actionId]
-        if (bundleKey != null) {
-            e.presentation.text = MyMessageBundle.message("$bundleKey.text")
-            e.presentation.description = MyMessageBundle.message("$bundleKey.description")
-        }
-
         val editor = e.getData(CommonDataKeys.EDITOR)
         e.presentation.isEnabledAndVisible =
             e.project != null &&
@@ -46,15 +37,6 @@ class DeepSeekAIAction : AnAction(), DumbAware {
     override fun getActionUpdateThread() = ActionUpdateThread.EDT
 
     companion object {
-        /** Action ID → 字典 key 前缀（.text / .description 拼接） */
-        private val TEXT_MAP = mapOf(
-            "DeepSeekSync.ExplainCode"  to "action.send.explain",
-            "DeepSeekSync.ImproveCode"  to "action.send.improve",
-            "DeepSeekSync.ReviewCode"   to "action.send.review",
-            "DeepSeekSync.TestCode"     to "action.send.test",
-            "DeepSeekSync.CommentCode"  to "action.send.comment",
-        )
-
         /** Action ID → prompt key */
         private val PROMPT_MAP = mapOf(
             "DeepSeekSync.ExplainCode"  to "action.send.explain.prompt",

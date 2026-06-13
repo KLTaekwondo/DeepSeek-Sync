@@ -46,8 +46,6 @@ class ExplainTerminalErrorAction : AnAction(), DumbAware {
     }
 
     override fun update(e: AnActionEvent) {
-        e.presentation.text = MyMessageBundle.message("action.explain.text")
-        e.presentation.description = MyMessageBundle.message("action.explain.description")
         e.presentation.isEnabledAndVisible = e.project != null
     }
 

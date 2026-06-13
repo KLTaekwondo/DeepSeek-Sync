@@ -16,7 +16,7 @@ import java.awt.datatransfer.StringSelection
 object DeepSeekInjector {
 
     private const val CHAT_URL = "https://chat.deepseek.com/"
-    private const val TOOL_WINDOW_ID = "DeepSeek-Sync/深度同步"
+    private const val TOOL_WINDOW_ID = "DeepSeek-Sync"
 
     /**
      * 将文本注入到 DeepSeek 聊天输入框并激活侧边栏。

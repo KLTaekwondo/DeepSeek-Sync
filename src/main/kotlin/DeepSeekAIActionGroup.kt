@@ -11,10 +11,5 @@ import com.intellij.openapi.project.DumbAware
  */
 class DeepSeekAIActionGroup : DefaultActionGroup(null, true), DumbAware {
 
-    override fun update(e: AnActionEvent) {
-        e.presentation.text = MyMessageBundle.message("action.send.group.text")
-        e.presentation.description = MyMessageBundle.message("action.send.group.description")
-    }
-
     override fun getActionUpdateThread() = ActionUpdateThread.EDT
 }

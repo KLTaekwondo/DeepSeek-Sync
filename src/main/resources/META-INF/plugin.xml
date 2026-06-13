@@ -10,6 +10,7 @@
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor>KL_Taekwondo</vendor>
     <version>0.2.2</version>
+    <resource-bundle>messages.MyMessageBundle</resource-bundle>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
@@ -85,7 +86,7 @@
     <!-- Extensions defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="DeepSeek-Sync/深度同步"
+        <toolWindow id="DeepSeek-Sync"
                     factoryClass="com.kldo.DeepSeekSyncFactory"
                     icon="/META-INF/actionIcon.svg"/>
         <notificationGroup id="DeepSeek-Sync"
@@ -96,57 +97,41 @@
     <actions>
         <group id="DeepSeekSync.DeepSeekAIActions"
                class="com.kldo.DeepSeekAIActionGroup"
-               text="发送到 DeepSeek"
-               description="更多 DeepSeek Sync 操作"
                icon="/META-INF/actionIcon.svg"
                popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
 
             <action id="DeepSeekSync.ExplainCode"
-                    class="com.kldo.DeepSeekAIAction"
-                    text="📖 解释代码"
-                    description="解释选中代码的作用和工作原理">
+                    class="com.kldo.DeepSeekAIAction">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift D"/>
             </action>
 
             <action id="DeepSeekSync.ImproveCode"
-                    class="com.kldo.DeepSeekAIAction"
-                    text="✨ 改进代码"
-                    description="分析选中代码并提出改进建议">
+                    class="com.kldo.DeepSeekAIAction">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift O"/>
             </action>
             <action id="DeepSeekSync.ReviewCode"
-                    class="com.kldo.DeepSeekAIAction"
-                    text="🔍 检查代码"
-                    description="检查选中代码中可能存在的 Bug 和问题">
+                    class="com.kldo.DeepSeekAIAction">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift P"/>
             </action>
             <action id="DeepSeekSync.TestCode"
-                    class="com.kldo.DeepSeekAIAction"
-                    text="🧪 编写测试"
-                    description="为选中代码编写单元测试">
+                    class="com.kldo.DeepSeekAIAction">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift Q"/>
             </action>
             <action id="DeepSeekSync.CommentCode"
-                    class="com.kldo.DeepSeekAIAction"
-                    text="💬 添加注释"
-                    description="为选中代码添加中文注释">
+                    class="com.kldo.DeepSeekAIAction">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift T"/>
             </action>
         </group>
 
         <action id="DeepSeekSync.OpenDeepSeek"
                 class="com.kldo.OpenDeepSeekAction"
-                icon="/META-INF/actionIcon.svg"
-                text="打开 DeepSeek 聊天"
-                description="打开 DeepSeek 聊天侧栏">
+                icon="/META-INF/actionIcon.svg">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift S"/>
         </action>
         <action id="DeepSeekSync.ExplainTerminalError"
                 class="com.kldo.ExplainTerminalErrorAction"
-                icon="/META-INF/actionIcon.svg"
-                text="向 DeepSeek 解释此错误"
-                description="分析终端错误并给出修复方案">
+                icon="/META-INF/actionIcon.svg">
             <add-to-group group-id="Terminal.ReworkedTerminalContextMenu" anchor="first"/>
         </action>
     </actions>

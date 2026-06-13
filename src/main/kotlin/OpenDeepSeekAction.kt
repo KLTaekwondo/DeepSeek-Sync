@@ -29,16 +29,11 @@ class OpenDeepSeekAction : AnAction(), DumbAware {
         }
     }
 
-    override fun update(e: AnActionEvent) {
-        e.presentation.text = MyMessageBundle.message("action.open.text")
-        e.presentation.description = MyMessageBundle.message("action.open.description")
-    }
-
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.EDT
     }
 
     companion object {
-        private const val TOOL_WINDOW_ID = "DeepSeek-Sync/深度同步"
+        private const val TOOL_WINDOW_ID = "DeepSeek-Sync"
     }
 }
