@@ -2,6 +2,9 @@
 
 # Deepseek-sync Changelog
 
+> **🧘 此插件功能有缘更新，更多只剩下维护，核心功能已基本实现。**
+> **🧘 Feature updates on a rolling basis; otherwise, maintenance only — core features are complete.**
+
 ## [0.3.0]
 
 ### Added
@@ -11,6 +14,8 @@
 - 🖼️ Tool window title bar icon buttons (chat/platform/custom/refresh) — no more text tabs
 - ⚡ Settings action in right-click "Send to DeepSeek" popup menu
 - 🏷️ Convention-based action localization via `<resource-bundle>`
+- 🌍 Settings panel UI strings localized in all 7 languages
+- 📝 Maintenance notice at the bottom of settings page
 
 ### Fixed
 - 🔁 Auto-switch to chat tab when sending code from any tab
@@ -22,6 +27,8 @@
 - 🖼️ 标题栏图标按钮切换页面（聊天/控制台/自定义/刷新），去掉文本标签页
 - ⚡ 右键菜单新增「设置」入口
 - 🏷️ 基于 `<resource-bundle>` 约定的 Action 本地化
+- 🌍 设置面板全部文字支持 7 语言本地化
+- 📝 设置页面底部添加维护期告示
 
 ### 修复
 - 🔁 发送代码时自动跳转到聊天标签页
