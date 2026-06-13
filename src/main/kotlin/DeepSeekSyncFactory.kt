@@ -52,15 +52,27 @@ class DeepSeekSyncFactory : ToolWindowFactory {
         val globeIcon = IconLoader.getIcon("/META-INF/tabGlobe.svg", javaClass)
 
         toolWindow.setTitleActions(listOf(
-            object : AnAction("Chat", "切换到聊天", chatIcon) {
+            object : AnAction(
+                MyMessageBundle.message("tab.chat"),
+                MyMessageBundle.message("tab.chat"),
+                chatIcon
+            ) {
                 override fun actionPerformed(e: AnActionEvent) { selectedTab = 0 }
                 override fun getActionUpdateThread() = ActionUpdateThread.EDT
             },
-            object : AnAction("Platform", "切换到控制台", platformIcon) {
+            object : AnAction(
+                MyMessageBundle.message("tab.platform"),
+                MyMessageBundle.message("tab.platform"),
+                platformIcon
+            ) {
                 override fun actionPerformed(e: AnActionEvent) { selectedTab = 1 }
                 override fun getActionUpdateThread() = ActionUpdateThread.EDT
             },
-            object : AnAction("Custom", "切换到自定义", globeIcon) {
+            object : AnAction(
+                MyMessageBundle.message("tab.custom"),
+                MyMessageBundle.message("tab.custom"),
+                globeIcon
+            ) {
                 override fun actionPerformed(e: AnActionEvent) { selectedTab = 2 }
                 override fun getActionUpdateThread() = ActionUpdateThread.EDT
             },
