@@ -17,65 +17,51 @@
     <description><![CDATA[
         Bring DeepSeek Web Chat into your IDE.<br>
         No more switching between browser and editor — just open the side panel, log in, and start chatting.
-
-        <br><b>Highlights:</b>
+        <br>
+        <br><b>What it does:</b>
         <ul>
-            <li>Embedded DeepSeek Web Chat in a side tool window</li>
-            <li>One-click access without leaving the IDE</li>
-            <li>Stay in flow and get answers faster</li>
-            <li>Support DeepSeek Platform in the IDE side panel</li>
-            <li>Custom URL browser with navigation and bookmarks</li>
+            <li>🌐 <b>DeepSeek Web Chat</b> — Embedded in a side tool window, no browser switching needed</li>
+            <li>📊 <b>Platform Dashboard</b> — Quick access to platform.deepseek.com for API Key & credit monitoring</li>
+            <li>🧭 <b>Custom URL Browser</b> — Browse any website with navigation controls and bookmarks (max 15)</li>
+            <li>🤖 <b>AI Code Actions</b> — Select code → right-click → Explain / Improve / Review / Test / Comment</li>
+            <li>🧠 <b>PSI Context</b> — Prompt templates auto-inject {class}, {method}, {package}, {imports}</li>
+            <li>⚙️ <b>Customizable Templates</b> — Freely edit labels and prompts in Settings → Tools → DeepSeek-Sync</li>
+            <li>🐛 <b>Terminal Error Analysis</b> — Right-click terminal errors for instant AI explanation</li>
+            <li>🌍 <b>7 Languages</b> — English, 中文, 日本語, 한국어, Deutsch, Français, Русский</li>
+            <li>🚀 <b>Multi-IDE</b> — Works with IntelliJ IDEA, PyCharm, WebStorm, GoLand, CLion, Rider, PhpStorm, RubyMine and more</li>
         </ul>
-
+        <br>
+        <b>How to use:</b>
+        <ol>
+            <li>Install the plugin and restart your IDE</li>
+            <li>Click the DeepSeek-Sync icon in the left sidebar (below file tree buttons)</li>
+            <li>Log into your DeepSeek account in the embedded browser</li>
+            <li>Select code in the editor, right-click → <b>Send to DeepSeek Sync</b> → choose an action</li>
+        </ol>
+        <br>
         <br><b>中文介绍：</b>
         <ul>
-            <li>将 DeepSeek 网页版带入你的 IDE</li>
-            <li>无需切换浏览器，侧边栏直接对话</li>
-            <li>保持编码心流，更快获得帮助</li>
-            <li>支持查看 DeepSeek Platform 数据</li>
-            <li>自定义网址浏览器 + 导航 & 收藏夹</li>
+            <li>🌐 <b>DeepSeek 网页聊天</b> — 侧边栏嵌入，无需离开 IDE</li>
+            <li>📊 <b>Platform 控制台</b> — 快速查看 API Key 状态与剩余额度</li>
+            <li>🧭 <b>自定义浏览器</b> — 浏览任意网页，支持导航按钮与收藏夹（最多 15 条）</li>
+            <li>🤖 <b>AI 代码操作</b> — 选中代码 → 右键 → 解释 / 改进 / 审查 / 测试 / 注释</li>
+            <li>🧠 <b>PSI 上下文</b> — 模板自动注入 {class}、{method}、{package}、{imports}</li>
+            <li>⚙️ <b>可自定义模板</b> — 在设置 → 工具 → DeepSeek-Sync 自由编辑标签和提示词</li>
+            <li>🐛 <b>终端错误分析</b> — 右键终端错误，AI 秒级分析原因</li>
+            <li>🌍 <b>7 种语言</b> — 简体中文、English、日本語、한국어、Deutsch、Français、Русский</li>
+            <li>🚀 <b>多 IDE 支持</b> — 兼容 IntelliJ IDEA、PyCharm、WebStorm、GoLand、CLion 等全部 JetBrains IDE</li>
         </ul>
+        <br>
+        <b>使用方法：</b>
+        <ol>
+            <li>安装插件后重启 IDE</li>
+            <li>点击左侧边栏文件树按钮下方的 DeepSeek-Sync 图标</li>
+            <li>在嵌入的浏览器中登录 DeepSeek 账号</li>
+            <li>在编辑器中选中代码，右键 → <b>发送到 DeepSeek Sync</b> → 选择操作</li>
+        </ol>
 ]]></description>
 
-    <change-notes><![CDATA[
-<b>0.2.1</b><br>
-<ul>
-  <li>🤖 AI context menu (Explain/Improve/Review/Test/Comment)</li>
-  <li>⌨️ Keyboard shortcuts: Ctrl+Shift+D/O/P/Q/T</li>
-  <li>🖱️ Right-click selected code → "发送到 DeepSeek" submenu</li>
-  <li>🎨 Unified DeepSeek icons for all actions</li>
-</ul>
-<b>0.2.1 新增功能</b><br>
-<ul>
-  <li>🤖 新增 AI 代码操作二级菜单</li>
-  <li>⌨️ 专属快捷键，快速调用各种 AI 能力</li>
-  <li>🖱️ 选中代码右键直达</li>
-</ul>
-<b>0.2.0</b><br>
-<ul>
-  <li>🌐 Custom browser tab with URL persistence</li>
-  <li>◀▶ Navigation buttons (go back / forward)</li>
-  <li>⭐ Bookmarks (max 15) with collapsible panel</li>
-  <li>↗ Open in system browser (for video sites)</li>
-  <li>🔀 Fixed tab links → auto open in custom tab</li>
-  <li>🎯 Popup windows intercepted, loaded in-plugin</li>
-  <li>⌨️ Global shortcut to toggle sidebar (Ctrl+Shift+S)</li>
-  <li>🔄 URL bar syncs with page navigation</li>
-  <li>🎨 Hover animation effects on toolbar buttons</li>
-</ul>
-<b>0.2.0 新增功能</b><br>
-<ul>
-  <li>🌐 自定义浏览器标签页，URL 持久化保存</li>
-  <li>◀▶ 前进/后退导航按钮</li>
-  <li>⭐ 收藏夹（最多 15 条），可折叠面板</li>
-  <li>↗ 系统浏览器打开（视频网站兜底）</li>
-  <li>🔀 固定标签页点链接 → 自动转到自定义页打开</li>
-  <li>🎯 弹窗拦截，在插件内打开</li>
-  <li>⌨️ 全局快捷键切换侧栏（Ctrl+Shift+S）</li>
-  <li>🔄 地址栏随页面导航自动同步</li>
-  <li>🎨 工具栏按钮悬停动效</li>
-</ul>
-    ]]></change-notes>
+    <change-notes/>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
