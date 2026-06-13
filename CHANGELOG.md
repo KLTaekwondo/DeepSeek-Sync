@@ -2,12 +2,12 @@
 
 # Deepseek-sync Changelog
 
-> **🧘 此插件功能有缘更新，更多只剩下维护，核心功能已基本实现。**
-> **🧘 Feature updates on a rolling basis; otherwise, maintenance only — core features are complete.**
-
 ## [0.3.0]
 
-### Added
+- ***🧘 此插件功能有缘更新，更多只剩下维护，核心功能已基本实现。感谢你的支持！***
+- ***🧘 Feature updates on a rolling basis; otherwise, maintenance only — core features are complete. Thanks for your support!***
+
+### v0.3.0 NEWS
 - ⚙️ Customizable AI prompt templates (5 slots) via Settings panel
 - 🧠 PSI context variables: `{class}`, `{method}`, `{package}`, `{imports}` in templates
 - 🔄 PSI variables added to default templates — AI sees file, class, method context automatically
@@ -17,10 +17,10 @@
 - 🌍 Settings panel UI strings localized in all 7 languages
 - 📝 Maintenance notice at the bottom of settings page
 
-### Fixed
+### v0.3.0 FIXES
 - 🔁 Auto-switch to chat tab when sending code from any tab
 
-### 新增
+### v0.3.0 新增
 - ⚙️ 自定义 AI 提示词模板（5 个槽位），支持设置面板编辑
 - 🧠 PSI 上下文变量：`{class}` `{method}` `{package}` `{imports}` 自动注入
 - 🔄 默认模板已包含 PSI 上下文，AI 自动获取文件/类/方法信息
@@ -30,7 +30,7 @@
 - 🌍 设置面板全部文字支持 7 语言本地化
 - 📝 设置页面底部添加维护期告示
 
-### 修复
+### v0.3.0 修复
 - 🔁 发送代码时自动跳转到聊天标签页
 
 ## [0.2.2]
