@@ -1,6 +1,13 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # Deepseek-sync Changelog
+## [0.3.1]
+
+### v0.3.1 FIXED
+- Fixed NoClassDefFoundError: com/intellij/ui/jcef/JBCefApp caused by missing explicit JCEF module dependency
+
+### v0.3.1 修复
+- 修复因 JCEF 模块依赖缺失导致的 NoClassDefFoundError: com/intellij/ui/jcef/JBCefApp 问题
 
 ## [0.3.0]
 

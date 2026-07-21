@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.changelog")
     id("org.jetbrains.intellij.platform")
+    kotlin("plugin.lombok") version "2.2.20"
 }
 
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
@@ -28,4 +29,11 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:okhttp-sse:4.12.0")
+    testImplementation(kotlin("test"))
+}
+repositories {
+    mavenCentral()
+    intellijPlatform{
+        defaultRepositories()
+    }
 }
